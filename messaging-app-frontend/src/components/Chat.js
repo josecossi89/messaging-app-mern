@@ -8,9 +8,20 @@ import {
 } from "@material-ui/icons";
 import MicIcon from "@mui/icons-material/Mic";
 import "./Chat.css";
-
-const Chat = () => {
+import axios from "./axios";
+const Chat = ({ messages }) => {
   const [seed, setSeed] = useState("");
+  const [input, setInput] = useState("");
+  const sendMessage = async (e) => {
+    e.preventDefault();
+    await axios.post("/messages/new", {
+      message: input,
+      name: "josecossib",
+      timestamp: new Date().toUTCString(),
+      received: true,
+    });
+    setInput("");
+  };
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000));
   }, []);
@@ -35,27 +46,28 @@ const Chat = () => {
         </div>
       </div>
       <div className="chat__body">
-        <p className="chat__message">
-          <span className="chat__name">Jose Cossi</span>
-          This is a message
-          <span className="chat__timestamp">{new Date().toUTCString()}</span>
-        </p>
-        <p className="chat__message chat__receiver">
-          <span className="chat__name">Parag</span>
-          This is a message back
-          <span className="chat__timestamp">{new Date().toUTCString()}</span>
-        </p>
-        <p className="chat__message">
-          <span className="chat__name">Jose Cossi</span>
-          This is a message again again
-          <span className="chat__timestamp">{new Date().toUTCString()}</span>
-        </p>
+        {messages.map((message) => (
+          <p
+            className={`chat__message ${message.received && "chat__receiver"}`}
+          >
+            <span className="chat__name">{message.name}</span>
+            {message.message}
+            <span className="chat__timestamp">{message.timestamp}</span>
+          </p>
+        ))}
       </div>
       <div className="chat__footer">
         <InsertEmoticon />
         <form>
-          <input placeholder="Type a message" type="text" />
-          <button type="submit">Send a message</button>
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Type a message"
+            type="text"
+          />
+          <button onClick={sendMessage} type="submit">
+            Send a message
+          </button>
         </form>
         <MicIcon />
       </div>
