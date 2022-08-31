@@ -19,8 +19,10 @@
   },
   "homepage": "https://github.com/josecossi89/messaging-app-mern#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.1",
     "mongoose": "^6.5.4",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "pusher": "^5.1.1-beta"
   }
 }
