@@ -1,4 +1,4 @@
-export const initialState = { use: null };
+export const initialState = { user: null };
 
 export const actionsTypes = {
   SET_USER: "SET_USER",
