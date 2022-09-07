@@ -12,7 +12,7 @@ const SidebarChat = ({ messages }) => {
       <Avatar src={`https://avatars.dicebear.com/api/human/b${seed}.svg`} />
       <div className="sidebarChat__info">
         <h2>Dev Help</h2>
-        <p>{messages[messages.length - 1]?.messages}</p>
+        <p>{messages[messages.length - 1]?.message}</p>
       </div>
     </div>
   );
