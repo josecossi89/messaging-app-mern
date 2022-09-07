@@ -10,7 +10,7 @@ import { useStateValue } from "./components/StateProvider";
 function App() {
   const [messages, setMessages] = useState([]);
   // const [user, setUser] = useState(null);
-  const [{ user }] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
   useEffect(() => {
     axios.get("/messages/sync").then((res) => {
       setMessages(res.data);
